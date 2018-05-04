@@ -1,0 +1,17 @@
+# Usage: Use CI/CD Image locally
+
+version: '3.5'
+
+services:
+  cicd:
+    image: lappis/gitlab-ci-cd:latest
+    links:
+      - docker
+    environment:
+      DOCKER_HOST: tcp://docker:2375
+    volumes:
+      - .:/code
+    working_dir: /code
+  docker:
+    image: docker:dind
+    privileged: true
